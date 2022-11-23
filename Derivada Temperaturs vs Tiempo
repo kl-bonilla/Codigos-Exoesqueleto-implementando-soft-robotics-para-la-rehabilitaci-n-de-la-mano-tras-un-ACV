@@ -1,0 +1,16 @@
+for k=1:1:5376-1
+    deri(k)=(T(k+1)-T(k))/(t(k+1)-t(k));
+end
+plot(t(1:end-1),deri)
+hold on
+for k=1:1:5376-1
+    deri(k)=(T(k+1)-T(k))/(t(k+1)-t(k));
+end
+for k=1:1:5376-1
+    deri3(k)=(T3(k+1)-T3(k))/(t(k+1)-t(k));
+end
+plot(t,deri)
+hold on
+plot(t,deri2)
+hold on
+plot(t,deri3)
