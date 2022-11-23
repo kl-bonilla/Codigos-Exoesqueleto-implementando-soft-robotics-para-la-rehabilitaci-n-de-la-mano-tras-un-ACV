@@ -1,0 +1,33 @@
+function [T,strain, stress, theta] = SMAmodel(I, step, Time)
+
+To=20;%ambient temperature {C)
+m = 0.00014; %SMA mass (Kg]
+R= 8.5; %SMA initial resistance [Ohms]
+Lo=0.9;
+ro=0.00825;
+%Fixed Parameters
+Cp = 0.2;
+Ac=0.0004712;
+hc = 150;
+t=0:step:Time; 
+%Initial conditions
+T(1)= To(1); %Initial Temperature ICI
+stress(1)= 75; %Initial stress MPa
+strain(1)= 0.06; %IMPa
+Text = To(1);
+%Evolution during Heating
+%Temperature 
+p = length(t); cont2 = 1; cont=1;
+tempo=2;
+for i=1:p-1
+    T(i+1)= step*((I*I*R)-hc*Ac*(T(i)-Text))+T(i);
+    cont = cont+1;
+    if tempo <= (length(To)-1)
+        if cont > p/(length(To)-1);
+            cont2 =cont2+1;
+            Text=To(cont2);
+            cont= 1;
+        end
+        tempo = tempo+1;
+    end
+end
